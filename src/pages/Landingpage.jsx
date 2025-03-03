@@ -1,16 +1,10 @@
 import React from "react";
-import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
-import AboutUs from "../components/AboutUs";
-import Footer from "../components/Footer";
 
-const App = () => {
+const App = ({ toggleDarkMode }) => {
   return (
     <div>
-      <Navbar />
-      <Hero />
-      <AboutUs />
-      <Footer />
+      <Hero toggleDarkMode={toggleDarkMode} />
     </div>
   );
 };
