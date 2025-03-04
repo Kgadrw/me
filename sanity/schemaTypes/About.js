@@ -22,23 +22,6 @@ export default {
       title: 'First Section Text',
       type: 'text',
     },
-    {
-      name: 'section2Image',
-      title: 'Second Section Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    },
-    {
-      name: 'section2Heading',
-      title: 'Second Section Heading',
-      type: 'string',
-    },
-    {
-      name: 'section2Text',
-      title: 'Second Section Text',
-      type: 'text',
-    },
+    
   ],
 };

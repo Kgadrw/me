@@ -20,7 +20,7 @@ const Navbar = ({ isMenuOpen, toggleMenu }) => {
           <span className="absolute bottom-0 left-0 w-full h-[2px] bg-blue-500 scale-x-0 transition-all group-hover:scale-x-100 group-active:scale-x-100"></span>
         </a>
         <a
-          href="/about"
+          href="https://portofolio-five-rho.vercel.app/"
           className="relative text-base font-medium text-gray-300 hover:text-blue-500 group"
         >
           Portfolio

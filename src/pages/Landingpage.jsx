@@ -7,6 +7,7 @@ import About from "../components/About";
 import Footer from "../components/Footer";
 import Features from "../components/Feature";
 import Plan from "../components/Plans";
+import Testimonial from "../components/Testmonial";
 
 const Landingpage = () => {
   return (
@@ -14,10 +15,12 @@ const Landingpage = () => {
       <Navbar />
       <Hero />
       <Features />
+
       <About />
-      <Plan />
-      <Service />
       <Course />
+      <Service />
+      <Plan />
+      <Testimonial />
       <Footer />
     </div>
   );
