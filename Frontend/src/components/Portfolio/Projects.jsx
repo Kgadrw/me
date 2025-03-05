@@ -7,14 +7,13 @@ const Portfolio = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch the portfolio data from Sanity
     client
       .fetch(
         '*[_type == "portfolio"]{title, owner, description, fullDescription, imageUrl, link}'
       )
       .then((data) => {
         setProjects(data);
-        setIsLoading(false); // Set loading to false after data is fetched
+        setIsLoading(false);
       })
       .catch((err) => {
         setError(err.message);
@@ -24,7 +23,7 @@ const Portfolio = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-950 text-white">
         <p>Loading...</p>
       </div>
     );
@@ -32,7 +31,7 @@ const Portfolio = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-950 text-white">
         <p>Error loading projects: {error}</p>
       </div>
     );
@@ -42,42 +41,41 @@ const Portfolio = () => {
     <section className="min-h-screen bg-gray-950 text-white py-16 px-8">
       <div className="text-center mb-16">
         <h2 className="text-5xl font-bold tracking-wide text-cyan-100 uppercase">
-          Recents Projects
+          Recent Projects
         </h2>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="bg-gray-950 border border-gray-900 p-2 rounded-lg shadow-md hover:shadow-lg transition-all"
+            className="bg-gray-900 border border-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-all overflow-hidden"
           >
             {/* Thumbnail */}
             <img
-              src={urlFor(project.imageUrl).width(400).height(300).url()} // Ensure responsive images
+              src={urlFor(project.imageUrl).width(600).height(400).url()}
               alt={project.title}
-              className="w-full h-40 object-container mb-4"
+              className="w-full h-60 object-container"
             />
 
-            {/* Title and Owner */}
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-semibold text-blue-400">
+            {/* Card Content */}
+            <div className="p-6">
+              <h3 className="text-2xl font-semibold text-blue-400">
                 {project.title}
               </h3>
-              <span className="text-sm text-gray-400">{project.owner}</span>
+              <p className="text-gray-400 text-sm mb-3">{project.owner}</p>
+              <p className="text-gray-300 mb-4">{project.description}</p>
+
+              {/* Visit Project Button */}
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block w-full py-3 text-center text-white bg-blue-500 hover:bg-blue-600 rounded-xl transition-all"
+              >
+                Visit Project
+              </a>
             </div>
-
-            {/* Short Description */}
-            <p className="text-base mb-4">{project.description}</p>
-
-            {/* Visit Project Button */}
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block w-full py-2 px-4 text-base text-white bg-blue-500 hover:bg-blue-600 rounded-full text-center mt-4"
-            >
-              Visit Project
-            </a>
           </div>
         ))}
       </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Menu, X, Bell, User } from "lucide-react"; // Importing icons
+import { Menu, X } from "lucide-react"; // Importing icons
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,84 +36,84 @@ const Navbar = () => {
     <nav className="relative flex items-center justify-between w-full px-16 py-4 text-white bg-gray-900 border-b border-gray-800 shadow-md">
       {/* Left Side: Logo */}
       <div className="flex items-center">
-        <img src="/logo.png" alt="Logo" className="object-cover h-10 w-21" />
+        <a href="/">
+          <img
+            src="/logo.png"
+            alt="Logo"
+            className="object-cover h-10 w-21 cursor-pointer"
+          />
+        </a>
       </div>
 
       {/* Desktop Navigation Links */}
       <div className="hidden space-x-6 md:flex">
         <a
           href="/"
-          className="relative text-base font-medium text-gray-300 hover:text-blue-500 group"
+          className="text-base font-medium text-gray-300 hover:text-blue-500"
         >
           Home
-          <span className="absolute bottom-0 left-0 w-full h-[2px] bg-blue-500 scale-x-0 transition-all group-hover:scale-x-100 group-active:scale-x-100"></span>
         </a>
         <a
           href="/about"
-          className="relative text-base font-medium text-gray-300 hover:text-blue-500 group"
+          className="text-base font-medium text-gray-300 hover:text-blue-500"
         >
           About
-          <span className="absolute bottom-0 left-0 w-full h-[2px] bg-blue-500 scale-x-0 transition-all group-hover:scale-x-100 group-active:scale-x-100"></span>
         </a>
         <a
           href="/portfolio"
-          className="relative text-base font-medium text-gray-300 hover:text-blue-500 group"
+          className="text-base font-medium text-gray-300 hover:text-blue-500"
         >
           Portfolio
-          <span className="absolute bottom-0 left-0 w-full h-[2px] bg-blue-500 scale-x-0 transition-all group-hover:scale-x-100 group-active:scale-x-100"></span>
         </a>
       </div>
 
-      {/* Right Side: Notification Icon, Account Icon, and Mobile Menu Button */}
+      {/* Right Side: Contact Us Button and Mobile Menu Button */}
       <div className="flex items-center space-x-6">
-        {/* Notification Icon */}
-        <div className="relative">
-          <Bell size={24} className="cursor-pointer hover:text-blue-500" />
-        </div>
-
-        {/* Account Icon */}
-        <div>
-          <User size={24} className="cursor-pointer hover:text-blue-500" />
-        </div>
+        {/* Contact Us Button */}
+        <a
+          href="/contact"
+          className="text-base font-medium text-white bg-blue-400 border border-blue-400 px-4 py-2 rounded-3xl transition-all hidden md:flex"
+        >
+          Contact Us
+        </a>
 
         {/* Mobile Menu Button */}
         <button
-          ref={buttonRef} // Attach the button ref
+          ref={buttonRef}
           onClick={toggleMenu}
           className="md:hidden"
+          aria-expanded={isMenuOpen}
         >
           {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile Navigation Menu */}
-      <div
-        ref={menuRef} // Attach the menu ref
-        className={`absolute top-0 right-0 w-1/2 bg-gray-900 text-white px-8 py-6 space-y-4 transform transition-transform duration-300 ease-in-out ${
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
-        } mt-16`} // Added mt-16 to push the menu down
-      >
-        {/* Removed the duplicate X button */}
-
-        <a
-          href="/"
-          className="block text-base font-medium text-gray-300 hover:text-blue-500"
+      {/* Mobile Navigation Menu - Now appears normally when open */}
+      {isMenuOpen && (
+        <div
+          ref={menuRef}
+          className="absolute top-16 right-0 w-full bg-gray-900 text-white px-8 py-6 space-y-4 md:hidden"
         >
-          Home
-        </a>
-        <a
-          href="/about"
-          className="block text-base font-medium text-gray-300 hover:text-blue-500"
-        >
-          About
-        </a>
-        <a
-          href="/portfolio"
-          className="block text-base font-medium text-gray-300 hover:text-blue-500"
-        >
-          Portfolio
-        </a>
-      </div>
+          <a
+            href="/"
+            className="block text-base font-medium text-gray-300 hover:text-blue-500"
+          >
+            Home
+          </a>
+          <a
+            href="/about"
+            className="block text-base font-medium text-gray-300 hover:text-blue-500"
+          >
+            About
+          </a>
+          <a
+            href="/portfolio"
+            className="block text-base font-medium text-gray-300 hover:text-blue-500"
+          >
+            Portfolio
+          </a>
+        </div>
+      )}
     </nav>
   );
 };
