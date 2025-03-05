@@ -52,6 +52,30 @@ const Navbar = ({ isMenuOpen, toggleMenu }) => {
           {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
+
+      {/* Mobile Navigation Menu */}
+      {isMenuOpen && (
+        <div className="absolute top-0 left-0 w-full px-8 py-6 text-white bg-gray-900 md:hidden">
+          <a
+            href="/"
+            className="block mb-4 text-base font-medium text-gray-300 hover:text-blue-500"
+          >
+            Home
+          </a>
+          <a
+            href="/about"
+            className="block mb-4 text-base font-medium text-gray-300 hover:text-blue-500"
+          >
+            About
+          </a>
+          <a
+            href="/portfolio"
+            className="block mb-4 text-base font-medium text-gray-300 hover:text-blue-500"
+          >
+            Portfolio
+          </a>
+        </div>
+      )}
     </nav>
   );
 };
