@@ -2,7 +2,7 @@ const Hero = () => {
   return (
     <div className="flex flex-col-reverse items-center justify-between min-h-[80vh] px-16 text-white md:flex-row md:px-16 bg-gray-950">
       {/* Left: Text Content */}
-      <div className="text-center md:w-2/3 md:text-left">
+      <div className="text-center md:w-1/2 md:text-left">
         <h1 className="text-4xl font-bold  text-blue-400 md:text-6xl">
           Altering the future of web hosting
         </h1>
@@ -30,9 +30,9 @@ const Hero = () => {
       {/* Right: Banner Image */}
       <div className="flex justify-center md:w-1/2">
         <img
-          src="/banner2.png"
+          src="/banner.gif"
           alt="Portfolio and Business Website"
-          className="w-full max-w-lg cover-container"
+          className="w-full max-w-2xl cover-container" // Increased max-width here
         />
       </div>
     </div>

@@ -1,79 +1,92 @@
 import React from "react";
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="py-8 text-white bg-gray-900">
-      <div className="container px-6 mx-auto md:px-12">
-        {/* Footer Top - Logo and Navigation */}
-        <div className="flex flex-col items-center justify-between mb-6 lg:flex-row">
-          {/* Logo or Brand Name */}
-          <div className="mb-4 text-xl font-semibold text-cyan-100 lg:mb-0">
-            <span>Novasite</span>
+    <footer className="relative bg-gray-900 text-white py-12 border-t border-gray-800 ">
+      <div className="max-w-7xl mx-auto px-6 lg:px-16">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+          {/* Logo Section */}
+          <div className="flex flex-col items-center md:items-start">
+            <img src="/logo.png" alt="Company Logo" className="h-12" />
+            <p className="mt-3 text-gray-400 text-sm max-w-xs text-center md:text-left">
+              Empowering businesses with innovative solutions. Let’s build the
+              future together.
+            </p>
           </div>
 
-          {/* Footer Links */}
-          <div className="flex flex-col text-center lg:flex-row lg:text-left">
-            <a
-              href="/privacy-policy"
-              className="mx-4 mb-4 text-sm transition duration-300 text-cyan-100 hover:text-cyan-300 lg:mb-0"
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="/terms-of-service"
-              className="mx-4 text-sm transition duration-300 text-cyan-100 hover:text-cyan-300"
-            >
-              Terms of Service
-            </a>
+          {/* Quick Links */}
+          <div className="flex flex-col text-center md:text-left">
+            <h4 className="text-lg font-semibold text-blue-400">Quick Links</h4>
+            <ul className="mt-3 space-y-2">
+              <li>
+                <a
+                  href="/"
+                  className="text-gray-400 hover:text-blue-400 transition"
+                >
+                  Home
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/about"
+                  className="text-gray-400 hover:text-blue-400 transition"
+                >
+                  About
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/portfolio"
+                  className="text-gray-400 hover:text-blue-400 transition"
+                >
+                  Portfolio
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Social Media Icons */}
+          <div className="flex flex-col items-center md:items-end">
+            <h4 className="text-lg font-semibold text-blue-400">Follow Us</h4>
+            <div className="mt-3 flex space-x-4">
+              {[
+                { icon: <FaFacebook />, href: "#" },
+                { icon: <FaTwitter />, href: "#" },
+                { icon: <FaLinkedin />, href: "#" },
+                { icon: <FaInstagram />, href: "#" },
+              ].map((item, index) => (
+                <a
+                  key={index}
+                  href={item.href}
+                  className="p-3 rounded-full border-2 border-gray-700 text-gray-400 hover:border-blue-400 hover:text-blue-400 transition"
+                >
+                  {item.icon}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Footer Bottom - Social Icons and Copyright */}
-        <div className="flex flex-col items-center justify-between lg:items-start lg:flex-row">
-          {/* Social Media Icons */}
-          <div className="flex justify-center gap-6 mb-4 lg:justify-start lg:mb-0">
+        {/* Footer Bottom */}
+        <div className="mt-10 border-t border-gray-800 pt-6 text-center">
+          <p className="text-sm text-gray-500">
+            &copy; {new Date().getFullYear()} NovaTech. All Rights Reserved.
+          </p>
+          <div className="mt-2 flex justify-center space-x-6 text-sm">
             <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="transition duration-300 text-cyan-100 hover:text-cyan-300"
+              href="#"
+              className="text-gray-500 hover:text-blue-400 transition"
             >
-              <Facebook size={24} />
+              Privacy
             </a>
             <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Twitter"
-              className="transition duration-300 text-cyan-100 hover:text-cyan-300"
+              href="#"
+              className="text-gray-500 hover:text-blue-400 transition"
             >
-              <Twitter size={24} />
+              Terms
             </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="transition duration-300 text-cyan-100 hover:text-cyan-300"
-            >
-              <Instagram size={24} />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="transition duration-300 text-cyan-100 hover:text-cyan-300"
-            >
-              <Linkedin size={24} />
-            </a>
-          </div>
-
-          {/* Copyright */}
-          <div className="text-xs text-center text-gray-400 lg:text-left">
-            <p>© {new Date().getFullYear()} Novasite. All Rights Reserved.</p>
           </div>
         </div>
       </div>

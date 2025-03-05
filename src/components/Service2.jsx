@@ -18,14 +18,6 @@ const ServiceCards = () => {
     <div className="py-16 bg-gray-950 sm:py-32">
       <div className="px-6 mx-auto max-w-7xl lg:px-8">
         {/* Heading Section */}
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-base font-semibold tracking-wide text-cyan-500 uppercase">
-            How Can We Help Today?
-          </h2>
-          <p className="mt-2 text-4xl font-extrabold text-cyan-100 sm:text-5xl">
-            Discover our variety of services.
-          </p>
-        </div>
 
         {/* Service Cards Section */}
         <div className="max-w-6xl mx-auto mt-16 sm:mt-20 lg:mt-24">

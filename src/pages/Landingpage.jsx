@@ -8,6 +8,7 @@ import Footer from "../components/Footer";
 import Features from "../components/Feature";
 import Plan from "../components/Plans";
 import Testimonial from "../components/Testmonial";
+import Contact from "../components/Contact";
 
 const Landingpage = () => {
   return (
@@ -19,8 +20,10 @@ const Landingpage = () => {
       <About />
       <Course />
       <Service />
-      <Plan />
+
       <Testimonial />
+      <Plan />
+      <Contact />
       <Footer />
     </div>
   );

@@ -32,11 +32,6 @@ export default {
       type: 'string',
       validation: (Rule) => Rule.required().min(2).max(50),
     },
-    {
-      name: 'ctaLink',
-      title: 'CTA Link',
-      type: 'url',
-      validation: (Rule) => Rule.uri({ scheme: ['http', 'https'] }).required(),
-    },
+    
   ],
 };

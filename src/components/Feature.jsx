@@ -34,12 +34,6 @@ const Features = () => {
                 {feature.title}
               </h3>
               <p className="mt-4 text-lg">{feature.description}</p>
-              <a
-                href="#"
-                className="inline-block mt-6 text-base font-medium text-blue-500 hover:text-blue-400"
-              >
-                Learn More
-              </a>
             </div>
           ))}
         </div>
