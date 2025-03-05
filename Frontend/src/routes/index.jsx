@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import LandingPage from "../pages/LandingPage";
+import LandingPage from "../pages/Landingpage";
 import Portfolio from "../pages/Portfolio";
 import AboutUs from "../pages/AboutUs";
 import ModalPage from "../pages/Modal";
