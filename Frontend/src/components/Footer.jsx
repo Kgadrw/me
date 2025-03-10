@@ -1,5 +1,5 @@
 import React from "react";
-import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaTwitter, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -22,10 +22,12 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-center">
             <div className="mt-3 flex space-x-6">
               {[
-                { icon: <FaFacebook />, href: "#" },
-                { icon: <FaTwitter />, href: "#" },
-                { icon: <FaLinkedin />, href: "#" },
-                { icon: <FaInstagram />, href: "#" },
+                { icon: <FaGithub />, href: "https://github.com/Kgadrw" },
+                { icon: <FaTwitter />, href: "https://x.com/gadkalisa05" },
+                {
+                  icon: <FaLinkedin />,
+                  href: "www.linkedin.com/in/gad-kalisa-2aa319333",
+                },
               ].map((item, index) => (
                 <a
                   key={index}
@@ -44,18 +46,8 @@ const Footer = () => {
               &copy; {new Date().getFullYear()} NovaTech. All Rights Reserved.
             </p>
             <div className="mt-2 flex space-x-6 text-sm">
-              <a
-                href="#"
-                className="text-gray-100 hover:text-blue-500 transition"
-              >
-                Privacy
-              </a>
-              <a
-                href="#"
-                className="text-gray-100 hover:text-blue-500 transition"
-              >
-                Terms
-              </a>
+              <a className="text-gray-100 transition">Privacy</a>
+              <a className="text-gray-100  transition">Terms</a>
             </div>
           </div>
         </div>

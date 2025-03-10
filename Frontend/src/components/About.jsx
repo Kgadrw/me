@@ -25,23 +25,28 @@ const BlogSection = () => {
             posts.map((post) => (
               <div
                 key={post._id}
-                className="transition border-2 border-gray-300 rounded-xl shadow-lg bg-white hover:shadow-2xl"
+                className="w-full md:w-[98%] transition border-2 border-gray-300 rounded-xl shadow-lg bg-white hover:shadow-2xl"
               >
                 <img
                   src={urlFor(post.mainImage).url()}
                   alt={post.title}
-                  className="object-container w-full h-64 rounded-t-xl"
+                  className="object-cover w-full h-56 rounded-t-xl"
                 />
-                <div className="p-8">
-                  <h3 className="text-3xl font-bold text-blue-500">
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold text-blue-500">
                     {post.title}
                   </h3>
-                  <p className="mt-4 text-lg md:text-xl leading-relaxed">
-                    {post.excerpt}
+                  <p className="text-gray-600 text-sm mt-2">
+                    {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
                   </p>
+                  <p className="mt-3 text-md leading-relaxed">{post.excerpt}</p>
                   <a
                     href={post.link}
-                    className="block mt-4 text-lg font-semibold text-blue-600 hover:underline"
+                    className="block mt-4 text-md font-semibold text-blue-600 hover:underline"
                   >
                     Read More →
                   </a>

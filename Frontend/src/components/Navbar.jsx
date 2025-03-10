@@ -48,10 +48,10 @@ const Navbar = () => {
       <div className="flex items-center space-x-6">
         {/* Contact Us Button */}
         <a
-          href="/contact"
+          href="mailto:kalisagad05@gmail.com"
           className="text-base font-medium text-white bg-blue-400 border border-blue-400 px-4 py-2 rounded-3xl transition-all hidden md:flex"
         >
-          Contact Us
+          Let's Talk
         </a>
 
         {/* Mobile Menu Button */}
@@ -64,33 +64,6 @@ const Navbar = () => {
           {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
-
-      {/* Mobile Navigation Menu - Now appears normally when open */}
-      {isMenuOpen && (
-        <div
-          ref={menuRef}
-          className="absolute top-16 right-0 w-full bg-gray-900 text-white px-8 py-6 space-y-4 md:hidden"
-        >
-          <a
-            href="/"
-            className="block text-base font-medium text-gray-300 hover:text-blue-500"
-          >
-            Home
-          </a>
-          <a
-            href="/about"
-            className="block text-base font-medium text-gray-300 hover:text-blue-500"
-          >
-            About
-          </a>
-          <a
-            href="/portfolio"
-            className="block text-base font-medium text-gray-300 hover:text-blue-500"
-          >
-            Portfolio
-          </a>
-        </div>
-      )}
     </nav>
   );
 };

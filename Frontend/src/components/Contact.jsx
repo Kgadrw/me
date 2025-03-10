@@ -29,7 +29,7 @@ const ContactInfo = () => {
       )
       .then(
         (response) => {
-          setStatus("Thanks for writing for us We'll be back to you soon !");
+          setStatus("Thanks for writing for me,  I'll be back to you soon !");
           setEmail(""); // Reset the email field
           setMessage(""); // Reset the message field
           setIsSending(false); // Revert button text to "Send Message"
