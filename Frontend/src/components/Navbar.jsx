@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Menu, X } from "lucide-react"; // Importing icons
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef(null); // Ref to the mobile menu container
-  const buttonRef = useRef(null); // Ref to the mobile menu button
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
 
-  // Toggle menu function
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
-  // Close the menu if a click occurs outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -19,14 +17,12 @@ const Navbar = () => {
         !menuRef.current.contains(event.target) &&
         !buttonRef.current.contains(event.target)
       ) {
-        setIsMenuOpen(false); // Close the menu
+        setIsMenuOpen(false);
       }
     };
 
-    // Add event listener for clicks outside
     document.addEventListener("mousedown", handleClickOutside);
 
-    // Cleanup event listener on component unmount
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -46,26 +42,7 @@ const Navbar = () => {
       </div>
 
       {/* Desktop Navigation Links */}
-      <div className="hidden space-x-6 md:flex">
-        <a
-          href="/"
-          className="text-base font-medium text-gray-300 hover:text-blue-500"
-        >
-          Home
-        </a>
-        <a
-          href="/about"
-          className="text-base font-medium text-gray-300 hover:text-blue-500"
-        >
-          About
-        </a>
-        <a
-          href="/portfolio"
-          className="text-base font-medium text-gray-300 hover:text-blue-500"
-        >
-          Portfolio
-        </a>
-      </div>
+      <div className="hidden space-x-6 md:flex"></div>
 
       {/* Right Side: Contact Us Button and Mobile Menu Button */}
       <div className="flex items-center space-x-6">

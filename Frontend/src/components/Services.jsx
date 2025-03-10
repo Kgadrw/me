@@ -1,71 +1,71 @@
 import { useState, useEffect } from "react";
-import client, { urlFor } from "../sanityClient"; // Import client and urlFor
+import client, { urlFor } from "../sanityClient";
+import { Eye } from "lucide-react"; // Import Eye icon
 
-const ServiceCards = () => {
-  const [services, setServices] = useState([]);
+const PortfolioProjects = () => {
+  const [projects, setProjects] = useState([]);
 
-  // Fetch services from Sanity
+  // Fetch projects from Sanity
   useEffect(() => {
-    const fetchServices = async () => {
-      const query = '*[_type == "service"]'; // Sanity query to get all services
-      const servicesData = await client.fetch(query);
-      setServices(servicesData);
+    const fetchProjects = async () => {
+      try {
+        const query =
+          '*[_type == "portfolioProject"] | order(publishedAt desc)';
+        const data = await client.fetch(query);
+        console.log("Fetched projects:", data); // Debugging
+        setProjects(data);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
     };
-    fetchServices();
+    fetchProjects();
   }, []);
 
   return (
-    <div className="py-16 bg-gray-950 sm:py-32">
+    <div className="py-8 bg-gray-100 text-gray-900 sm:py-32">
       <div className="px-6 mx-auto max-w-7xl lg:px-8">
         {/* Heading Section */}
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-base font-semibold tracking-wide text-cyan-500 uppercase">
-            How Can We Help Today?
-          </h2>
-          <p className="mt-2 text-4xl font-extrabold text-cyan-100 sm:text-5xl">
-            Discover our variety of services.
-          </p>
-        </div>
+        <h2 className="text-5xl font-extrabold text-center text-blue-600">
+          My Works
+        </h2>
 
-        {/* Service Cards Section */}
-        <div className="max-w-6xl mx-auto mt-16 sm:mt-20 lg:mt-24">
-          <dl className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="relative flex flex-col items-center p-6 border border-gray-700 rounded-2xl shadow-lg bg-gray-950 hover:shadow-xl transition-all duration-300"
+        {/* Portfolio Cards */}
+        <div className="grid grid-cols-1 gap-8 mt-12 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project) => (
+            <div
+              key={project._id}
+              className="relative group overflow-hidden rounded-2xl shadow-lg border border-gray-200"
+            >
+              {/* Project Image */}
+              <img
+                src={urlFor(project.image).url()}
+                alt={project.title}
+                className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+
+              {/* Eye Icon Hover Effect */}
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               >
-                {/* Service Image */}
-                <div className="w-full flex justify-center mb-4">
-                  <img
-                    src={urlFor(service.image).url()} // Use urlFor to get the image URL
-                    alt={service.title}
-                    className="w-full h-48 rounded-lg object-container"
-                  />
-                </div>
+                <Eye className="w-12 h-12 text-white" />
+              </a>
 
-                {/* Service Title */}
-                <dt className="text-lg font-semibold text-white text-center">
-                  {service.title}
-                </dt>
-                <dd className="mt-2 text-sm text-gray-400 text-center">
-                  {service.description}
-                </dd>
-
-                {/* Call to Action Button */}
-                <a
-                  href="/modal"
-                  className="inline-block px-6 py-3 mt-4 text-sm font-medium text-white transition-all duration-300 rounded-full bg-cyan-600 hover:bg-cyan-500 shadow-md"
-                >
-                  {service.ctaText}
-                </a>
+              {/* Project Title */}
+              <div className="p-4 bg-white">
+                <h3 className="text-xl font-semibold text-gray-800">
+                  {project.title}
+                </h3>
+                <p className="mt-2 text-gray-600">{project.description}</p>
               </div>
-            ))}
-          </dl>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default ServiceCards;
+export default PortfolioProjects;

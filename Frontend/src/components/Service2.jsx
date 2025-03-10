@@ -1,63 +1,62 @@
 import { useState, useEffect } from "react";
+import { Eye } from "lucide-react"; // Eye icon for hover effect
 import client, { urlFor } from "../sanityClient"; // Import client and urlFor
 
-const ServiceCards = () => {
-  const [services, setServices] = useState([]);
+const PortfolioProjects = () => {
+  const [projects, setProjects] = useState([]);
 
-  // Fetch services from Sanity
+  // Fetch portfolio projects from Sanity
   useEffect(() => {
-    const fetchServices = async () => {
-      const query = '*[_type == "service"]'; // Sanity query to get all services
-      const servicesData = await client.fetch(query);
-      setServices(servicesData);
+    const fetchProjects = async () => {
+      const query = '*[_type == "portfolioProject"] | order(publishedAt desc)'; // Get latest projects
+      const data = await client.fetch(query);
+      setProjects(data);
     };
-    fetchServices();
+    fetchProjects();
   }, []);
 
   return (
-    <div className="py-16 bg-gray-950 sm:py-32">
+    <div className="py-16 bg-white sm:py-32">
       <div className="px-6 mx-auto max-w-7xl lg:px-8">
         {/* Heading Section */}
+        <h2 className="text-4xl font-bold text-center text-gray-900">
+          Recent Portfolio Projects
+        </h2>
 
-        {/* Service Cards Section */}
-        <div className="max-w-6xl mx-auto mt-16 sm:mt-20 lg:mt-24">
-          <dl className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="relative flex flex-col items-center p-6 border border-gray-700 rounded-2xl shadow-lg bg-gray-950 hover:shadow-xl transition-all duration-300"
-              >
-                {/* Service Image */}
-                <div className="w-full flex justify-center mb-4">
-                  <img
-                    src={urlFor(service.image).url()} // Use urlFor to get the image URL
-                    alt={service.title}
-                    className="w-full h-48 rounded-lg object-container"
-                  />
-                </div>
+        {/* Projects Grid */}
+        <div className="max-w-6xl mx-auto mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project) => (
+            <div key={project._id} className="relative group">
+              {/* Project Image */}
+              <img
+                src={urlFor(project.image).url()}
+                alt={project.title}
+                className="w-full h-64 object-cover rounded-lg shadow-lg"
+              />
 
-                {/* Service Title */}
-                <dt className="text-lg font-semibold text-white text-center">
-                  {service.title}
-                </dt>
-                <dd className="mt-2 text-sm text-gray-400 text-center">
-                  {service.description}
-                </dd>
-
-                {/* Call to Action Button */}
+              {/* Hover Overlay with Eye Icon */}
+              <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-lg">
                 <a
-                  href="/modal"
-                  className="inline-block px-6 py-3 mt-4 text-sm font-medium text-white transition-all duration-300 rounded-full bg-cyan-600 hover:bg-cyan-500 shadow-md"
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-white text-lg font-semibold"
                 >
-                  {service.ctaText}
+                  <Eye size={28} /> View
                 </a>
               </div>
-            ))}
-          </dl>
+
+              {/* Project Title */}
+              <h3 className="mt-4 text-xl font-semibold text-gray-900">
+                {project.title}
+              </h3>
+              <p className="mt-2 text-gray-600">{project.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default ServiceCards;
+export default PortfolioProjects;

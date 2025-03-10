@@ -16,13 +16,9 @@ const Landingpage = () => {
       <Navbar />
       <Hero />
       <Features />
-
-      <About />
       <Course />
       <Service />
-
-      <Testimonial />
-      <Plan />
+      <About />
       <Contact />
       <Footer />
     </div>

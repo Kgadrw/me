@@ -1,39 +1,58 @@
+import React, { useState, useEffect } from "react";
+import client, { urlFor } from "../sanityClient";
+
 const Hero = () => {
+  const [heroData, setHeroData] = useState(null);
+
+  useEffect(() => {
+    const fetchHeroData = async () => {
+      const query = '*[_type == "hero"][0]'; // Fetch the first hero document
+      const data = await client.fetch(query);
+      setHeroData(data);
+    };
+
+    fetchHeroData();
+  }, []);
+
+  if (!heroData) return <div className="text-center py-20">Loading...</div>;
+
   return (
-    <div className="flex flex-col-reverse items-center justify-between min-h-[80vh] px-16 text-white md:flex-row md:px-16 bg-gray-950">
-      {/* Left: Text Content */}
+    <div className="flex flex-col items-center justify-between min-h-[80vh] px-16 text-gray-900 md:flex-row md:px-16 bg-gray-100 font-serif">
+      {/* Left: Banner Image */}
+      <div className="flex justify-center md:w-1/2">
+        {heroData.backgroundImage ? (
+          <img
+            src={urlFor(heroData.backgroundImage).url()}
+            alt="Hero Background"
+            className="w-full max-w-lg h-[400px] rounded-lg shadow-lg object-container"
+          />
+        ) : (
+          <div className="w-full max-w-lg h-[400px] bg-gray-300 rounded-lg shadow-lg"></div>
+        )}
+      </div>
+
+      {/* Right: Text Content */}
       <div className="text-center md:w-1/2 md:text-left">
-        <h1 className="text-4xl font-bold  text-blue-400 md:text-6xl">
-          Altering the future of web hosting
+        <h1 className="text-5xl font-bold text-blue-600 md:text-6xl">
+          {heroData.title}
         </h1>
-        <p className="max-w-lg mt-8 text-lg font-medium leading-relaxed md:text-xl">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-          commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
-          et magnis dis parturient montes, nascetur ridiculus mus.
+        <p className="max-w-lg mt-6 text-lg font-thin text-gray-500 leading-relaxed md:text-xl">
+          {heroData.description}
         </p>
         <div className="flex flex-col mt-8 space-y-4 md:flex-row md:space-y-0 md:space-x-6">
           <a
-            href="#"
+            href={heroData.ctaPrimaryLink}
             className="px-6 py-3 text-lg font-medium text-white transition bg-blue-600 rounded-full hover:bg-blue-500"
           >
-            Get Started
+            {heroData.ctaPrimary}
           </a>
           <a
-            href="#"
-            className="px-6 py-3 text-lg font-medium transition border border-gray-300 rounded-full dark:border-gray-600 hover:bg-gray-600 dark:hover:bg-gray-800"
+            href={heroData.ctaSecondaryLink}
+            className="px-6 py-3 text-lg font-medium transition border border-gray-600 rounded-full hover:bg-gray-300"
           >
-            Explore Our Plans
+            {heroData.ctaSecondary}
           </a>
         </div>
-      </div>
-
-      {/* Right: Banner Image */}
-      <div className="flex justify-center md:w-1/2">
-        <img
-          src="/banner.gif"
-          alt="Portfolio and Business Website"
-          className="w-full max-w-2xl cover-container" // Increased max-width here
-        />
       </div>
     </div>
   );

@@ -44,11 +44,11 @@ const ContactInfo = () => {
   };
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row items-center bg-gray-900 text-white px-6 md:px-12 lg:px-20 py-8 md:py-12 ">
+    <div className="flex flex-col-reverse lg:flex-row items-center bg-gray-100 text-gray-800 px-6 md:px-12 lg:px-20 py-8 md:py-12">
       {/* Left Side - Contact Details & Form */}
       <div className="w-full lg:w-1/2 flex flex-col items-start text-left space-y-5 lg:pl-8">
-        <h2 className="text-3xl font-bold text-blue-400">Get in Touch</h2>
-        <p className="text-gray-300 max-w-md text-sm leading-relaxed">
+        <h2 className="text-3xl font-bold text-blue-500">Get in Touch</h2>
+        <p className="text-gray-600 max-w-md text-sm leading-relaxed">
           Have questions? Reach out to us, and we'll respond as soon as
           possible.
         </p>
@@ -60,7 +60,7 @@ const ContactInfo = () => {
             <div className="bg-blue-500 p-2 rounded-full">
               <Phone className="w-5 h-5 text-white" />
             </div>
-            <span className="text-sm font-medium">+250 7998 365</span>
+            <span className="text-sm font-medium">+250 791998 365</span>
           </div>
 
           {/* Email */}
@@ -90,7 +90,7 @@ const ContactInfo = () => {
         {/* Message Form */}
         <form onSubmit={handleSubmit} className="w-full space-y-3">
           <textarea
-            className="w-full p-3 bg-gray-800 rounded-md text-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 bg-gray-200 rounded-md text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             rows="3"
             placeholder="Write your message..."
             value={message}
@@ -98,7 +98,7 @@ const ContactInfo = () => {
           ></textarea>
           <input
             type="email"
-            className="w-full p-3 bg-gray-800 rounded-md text-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 bg-gray-200 rounded-md text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Your Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -115,9 +115,9 @@ const ContactInfo = () => {
       {/* Right Side - Banner Image */}
       <div className="w-full lg:w-1/2 mb-6 lg:mb-0 flex justify-center">
         <img
-          src="/banner.png"
+          src="/now.png"
           alt="Contact Banner"
-          className="w-full max-w-md lg:max-w-lg "
+          className="w-full max-w-md  lg:max-w-lg"
         />
       </div>
 

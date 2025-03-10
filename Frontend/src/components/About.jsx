@@ -1,50 +1,60 @@
 import React, { useState, useEffect } from "react";
-import client, { urlFor } from "../sanityClient"; // Import client and urlFor
+import client, { urlFor } from "../sanityClient";
 
-const AboutUs = () => {
-  const [aboutUsData, setAboutUsData] = useState(null);
+const BlogSection = () => {
+  const [posts, setPosts] = useState([]);
 
-  // Fetch data from Sanity
   useEffect(() => {
-    const fetchAboutUsData = async () => {
-      const query = '*[_type == "aboutUs"][0]'; // Get the first (and only) document for the About Us page
+    const fetchPosts = async () => {
+      const query = '*[_type == "blogPost"] | order(publishedAt desc)';
       const data = await client.fetch(query);
-      setAboutUsData(data);
+      setPosts(data);
     };
-    fetchAboutUsData();
+    fetchPosts();
   }, []);
 
-  if (!aboutUsData)
-    return (
-      <div className="flex flex-col justify-center py-4 text-xl font-bold text-center text-white bg-gray-950 about-us-container md:px-16">
-        No data to display
-      </div>
-    ); // Wait until the data is fetched
-
   return (
-    <div className="flex flex-col justify-center min-h-screen px-8 py-0 bg-gray-950 text-gray-950 about-us-container md:px-16">
-      {/* First Section: Banner Image on the Left, Text on the Right */}
-      <div className="flex flex-col items-center justify-between gap-4 mb-0 lg:flex-row">
-        <div className="w-full lg:w-1/2">
-          <img
-            src={urlFor(aboutUsData.section1Image).url()} // Dynamically fetch the image URL
-            alt="Banner"
-            className="object-contain w-full h-68 rounded-xl"
-          />
-        </div>
-        <div className="w-full lg:w-1/2">
-          <h2 className="mb-6 text-4xl font-extrabold leading-tight text-cyan-100">
-            {aboutUsData.section1Heading} {/* Dynamically fetch the heading */}
-          </h2>
-          <p className="text-lg text-gray-200">
-            {aboutUsData.section1Text} {/* Dynamically fetch the text */}
-          </p>
+    <div className="py-20 bg-white text-gray-900">
+      <div className="px-8 mx-auto max-w-7xl md:px-16">
+        <h2 className="text-5xl font-extrabold text-center text-blue-600 md:text-6xl">
+          Latest Blog Posts
+        </h2>
+
+        <div className="grid grid-cols-1 gap-12 mt-12 sm:grid-cols-2 lg:grid-cols-3">
+          {posts.length > 0 ? (
+            posts.map((post) => (
+              <div
+                key={post._id}
+                className="transition border-2 border-gray-300 rounded-xl shadow-lg bg-white hover:shadow-2xl"
+              >
+                <img
+                  src={urlFor(post.mainImage).url()}
+                  alt={post.title}
+                  className="object-container w-full h-64 rounded-t-xl"
+                />
+                <div className="p-8">
+                  <h3 className="text-3xl font-bold text-blue-500">
+                    {post.title}
+                  </h3>
+                  <p className="mt-4 text-lg md:text-xl leading-relaxed">
+                    {post.excerpt}
+                  </p>
+                  <a
+                    href={post.link}
+                    className="block mt-4 text-lg font-semibold text-blue-600 hover:underline"
+                  >
+                    Read More →
+                  </a>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-center text-xl">No blog posts available.</p>
+          )}
         </div>
       </div>
-
-      {/* Second Section: Text on the Left, Banner Image on the Right */}
     </div>
   );
 };
 
-export default AboutUs;
+export default BlogSection;
