@@ -53,11 +53,15 @@ const PortfolioProjects = () => {
                 <Eye className="w-12 h-12 text-white" />
               </a>
 
-              {/* Project Title */}
+              {/* Project Details */}
               <div className="p-4 bg-white">
                 <h3 className="text-xl font-semibold text-gray-800">
                   {project.title}
                 </h3>
+                <p className="mt-1 text-gray-500 text-sm">
+                  Created on:{" "}
+                  {new Date(project.publishedAt).toLocaleDateString()}
+                </p>
                 <p className="mt-2 text-gray-600">{project.description}</p>
               </div>
             </div>
