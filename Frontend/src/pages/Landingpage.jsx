@@ -13,11 +13,11 @@ import Contact from "../components/Contact";
 const Landingpage = () => {
   return (
     <div>
+      <Navbar />
       <Hero />
       <Features />
       <Course />
       <Service />
-      <About />
 
       <Footer />
     </div>

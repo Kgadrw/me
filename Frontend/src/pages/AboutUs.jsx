@@ -2,13 +2,13 @@ import React from "react";
 import Navbar from "../components/Navbar";
 
 import Footer from "../components/Footer";
-import Team from "../components/Team";
+import About from "../components/About";
 
 const AboutUs = () => {
   return (
     <div>
       <Navbar />
-      <Team />
+      <About />
       <Footer />
     </div>
   );

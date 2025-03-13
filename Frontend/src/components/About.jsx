@@ -13,7 +13,7 @@ const BlogSection = () => {
   }, []);
 
   const nextSlide = () => {
-    if (currentIndex < posts.length - 2) {
+    if (currentIndex < posts.length - 3) {
       setCurrentIndex(currentIndex + 1);
     }
   };
@@ -25,20 +25,18 @@ const BlogSection = () => {
   };
 
   return (
-    <div className="bg-gray-100 py-24 relative">
-      {/* Decorative Image at the top */}
-      <div className="absolute top-0 left-0 right-0 z-0">
-        <img
-          src="/imih.webp" // Replace with your actual path
-          alt="Decoration"
-          className="w-full h-[60px] object-cover opacity-60"
-        />
-      </div>
-
+    <div
+      className="bg-gray-100 py-24 relative"
+      style={{
+        backgroundImage: "url(/path/to/your-image.jpg)", // Add actual image path here
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <div className="relative px-8 mx-auto max-w-7xl md:px-16 z-10">
         {/* Heading Section */}
         <div className="text-center mb-16">
-          <h2 className="text-6xl font-extrabold text-blue-600 tracking-wide uppercase">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-blue-600 tracking-wide uppercase">
             Explore My Latest Blog Posts
           </h2>
         </div>
@@ -56,12 +54,12 @@ const BlogSection = () => {
             <img
               src={urlFor(posts[0].mainImage).url()}
               alt={posts[0].title}
-              className="object-cover w-full h-96"
+              className="object-cover w-full h-96 sm:h-80 md:h-96"
             />
 
             {/* Post Details */}
             <div className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black opacity-90">
-              <h3 className="text-3xl font-bold text-white mb-3 font-montserrat">
+              <h3 className="text-3xl sm:text-2xl font-bold text-white mb-3 font-montserrat">
                 {posts[0].title}
               </h3>
               <p className="text-sm text-white opacity-80 font-roboto">
@@ -97,7 +95,7 @@ const BlogSection = () => {
                   href={post.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative overflow-hidden shadow-xl bg-white flex-shrink-0 w-1/3 group"
+                  className="relative overflow-hidden shadow-xl bg-white flex-shrink-0 w-full sm:w-1/2 md:w-1/3 group"
                 >
                   {/* Post Image */}
                   <img
@@ -108,7 +106,7 @@ const BlogSection = () => {
 
                   {/* Post Details */}
                   <div className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black opacity-90">
-                    <h3 className="text-xl font-bold text-white mb-2 font-montserrat">
+                    <h3 className="text-xl sm:text-lg font-bold text-white mb-2 font-montserrat">
                       {post.title}
                     </h3>
                     <p className="text-sm text-white opacity-80 font-roboto">

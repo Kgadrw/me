@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react"; // Menu and X icons
+import { Github, Twitter, Linkedin } from "lucide-react"; // Correct imports for social icons
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,24 +30,49 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-10 bg-white shadow-md py-5 px-8">
+    <nav className="top-0 left-0 right-0 z-10 bg-transparent shadow-none py-5 px-4 sm:px-6 md:px-8">
       <div className="flex items-center justify-between">
-        {/* Left Side: Logo */}
-        <div className="flex items-center space-x-2">
-          <a href="/" className="text-4xl font-extrabold text-blue-600">
-            {"</>"}
+        {/* Left Side: Logo with Text */}
+        <div className="flex items-center space-x-2 pl-20">
+          <a
+            href="/"
+            className="text-3xl sm:text-4xl font-extrabold text-blue-600"
+          >
+            <img src="/gad.png" alt="logo" className="h-8  sm:h-10" />
           </a>
         </div>
 
-        {/* Right Side: Contact Us Button and Mobile Menu Button */}
-        <div className="flex items-center space-x-6">
-          {/* Contact Us Button */}
+        {/* Right Side: Blog Link, Social Media Icons, and Mobile Menu Button */}
+        <div className="flex items-center space-x-4 sm:space-x-6">
+          {/* Blog Link */}
           <a
-            href="mailto:kalisagad05@gmail.com"
-            className="text-base font-semibold text-white bg-blue-600 border border-blue-600 px-6 py-2 rounded-full transition-all hover:bg-blue-500 hover:border-blue-500"
+            href="/about"
+            className="text-sm sm:text-base font-semibold text-black hover:text-blue-600 hidden md:block"
           >
-            Let's Talk
+            Blogs
           </a>
+
+          {/* Social Media Icons with Circle Border */}
+          <div className="flex space-x-4">
+            <a
+              href="https://github.com/Kgadrw"
+              className="text-black hover:text-blue-600 border border-gray-300 rounded-full p-2 transition-all transform hover:scale-110 hover:bg-blue-600 hover:text-white"
+            >
+              <Github size={24} />
+            </a>
+            <a
+              href="https://twitter.com/Kgadrw"
+              className="text-black hover:text-blue-600 border border-gray-300 rounded-full p-2 transition-all transform hover:scale-110 hover:bg-blue-600 hover:text-white"
+            >
+              <Twitter size={24} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/gad-kalisa-2aa319333"
+              className="text-black hover:text-blue-600 border border-gray-300 rounded-full p-2 transition-all transform hover:scale-110 hover:bg-blue-600 hover:text-white"
+            >
+              <Linkedin size={24} />
+            </a>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -64,32 +90,14 @@ const Navbar = () => {
       {isMenuOpen && (
         <div
           ref={menuRef}
-          className="md:hidden absolute top-0 left-0 right-0 bg-white px-8 py-6 mt-16"
+          className="md:hidden absolute top-0 left-0 right-0 bg-white px-8 py-6 mt-16 shadow-lg"
         >
           <div className="flex flex-col space-y-4">
             <a
-              href="#home"
+              href="/about"
               className="text-black text-lg font-medium hover:text-blue-600"
             >
-              Home
-            </a>
-            <a
-              href="#about"
-              className="text-black text-lg font-medium hover:text-blue-600"
-            >
-              About
-            </a>
-            <a
-              href="#services"
-              className="text-black text-lg font-medium hover:text-blue-600"
-            >
-              Services
-            </a>
-            <a
-              href="#contact"
-              className="text-black text-lg font-medium hover:text-blue-600"
-            >
-              Contact
+              Blogs
             </a>
           </div>
         </div>
