@@ -14,7 +14,7 @@ const Hero = () => {
     fetchHeroData();
   }, []);
 
-  if (!heroData) return <div className="text-center py-20">Loading...</div>;
+  if (!heroData) return <div className="py-20 text-center">Loading...</div>;
 
   return (
     <div className="flex flex-col items-center justify-between min-h-[80vh] px-16 text-gray-900 md:flex-row md:px-16 bg-gray-100 font-serif">
@@ -36,7 +36,7 @@ const Hero = () => {
         <h1 className="text-5xl font-bold text-blue-600 md:text-6xl">
           {heroData.title}
         </h1>
-        <p className="max-w-lg mt-6 text-lg font-thin text-gray-500 leading-relaxed md:text-xl">
+        <p className="max-w-lg mt-6 text-lg font-thin leading-relaxed text-gray-500 md:text-xl">
           {heroData.description}
         </p>
         <div className="flex flex-col mt-8 space-y-4 md:flex-row md:space-y-0 md:space-x-6">

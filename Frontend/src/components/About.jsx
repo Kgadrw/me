@@ -1,60 +1,137 @@
 import React, { useState, useEffect } from "react";
 import client, { urlFor } from "../sanityClient";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const BlogSection = () => {
   const [posts, setPosts] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const query = '*[_type == "blogPost"] | order(publishedAt desc)';
-      const data = await client.fetch(query);
-      setPosts(data);
-    };
-    fetchPosts();
+    client
+      .fetch('*[_type == "blogPost"] | order(publishedAt desc)')
+      .then(setPosts);
   }, []);
 
-  return (
-    <div className="py-20 bg-white text-gray-900">
-      <div className="px-8 mx-auto max-w-7xl md:px-16">
-        <h2 className="text-5xl font-extrabold text-center text-blue-600 md:text-6xl">
-          Latest Blog Posts
-        </h2>
+  const nextSlide = () => {
+    if (currentIndex < posts.length - 2) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
 
-        <div className="grid grid-cols-1 gap-12 mt-12 sm:grid-cols-2 lg:grid-cols-3">
-          {posts.length > 0 ? (
-            posts.map((post) => (
-              <div
-                key={post._id}
-                className="w-full md:w-[98%] transition border-2 border-gray-300 rounded-xl shadow-lg bg-white hover:shadow-2xl"
-              >
-                <img
-                  src={urlFor(post.mainImage).url()}
-                  alt={post.title}
-                  className="object-cover w-full h-56 rounded-t-xl"
-                />
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-blue-500">
-                    {post.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm mt-2">
-                    {new Date(post.publishedAt).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </p>
-                  <p className="mt-3 text-md leading-relaxed">{post.excerpt}</p>
-                  <a
-                    href={post.link}
-                    className="block mt-4 text-md font-semibold text-blue-600 hover:underline"
-                  >
-                    Read More →
-                  </a>
-                </div>
+  const prevSlide = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+
+  return (
+    <div className="bg-gray-100 py-24 relative">
+      {/* Decorative Image at the top */}
+      <div className="absolute top-0 left-0 right-0 z-0">
+        <img
+          src="/imih.webp" // Replace with your actual path
+          alt="Decoration"
+          className="w-full h-[60px] object-cover opacity-60"
+        />
+      </div>
+
+      <div className="relative px-8 mx-auto max-w-7xl md:px-16 z-10">
+        {/* Heading Section */}
+        <div className="text-center mb-16">
+          <h2 className="text-6xl font-extrabold text-blue-600 tracking-wide uppercase">
+            Explore My Latest Blog Posts
+          </h2>
+        </div>
+
+        {/* First Blog Post (Big Card) */}
+        {posts.length > 0 && (
+          <a
+            key={posts[0]._id}
+            href={posts[0].link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative overflow-hidden shadow-2xl bg-white w-full mb-12 group"
+          >
+            {/* Post Image */}
+            <img
+              src={urlFor(posts[0].mainImage).url()}
+              alt={posts[0].title}
+              className="object-cover w-full h-96"
+            />
+
+            {/* Post Details */}
+            <div className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black opacity-90">
+              <h3 className="text-3xl font-bold text-white mb-3 font-montserrat">
+                {posts[0].title}
+              </h3>
+              <p className="text-sm text-white opacity-80 font-roboto">
+                Published: {new Date(posts[0].publishedAt).toLocaleDateString()}
+              </p>
+              <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <p className="text-white text-center px-4">
+                  {posts[0].excerpt}
+                </p>
               </div>
-            ))
-          ) : (
-            <p className="text-center text-xl">No blog posts available.</p>
+            </div>
+          </a>
+        )}
+
+        {/* Other Blog Posts (Carousel) */}
+        <div className="relative flex items-center mt-8">
+          {currentIndex > 0 && (
+            <button
+              className="absolute left-0 z-10 p-2 bg-white shadow-md"
+              onClick={prevSlide}
+            >
+              <ChevronLeft size={32} />
+            </button>
+          )}
+
+          <div className="flex gap-6 overflow-hidden w-full">
+            {posts
+              .slice(1)
+              .slice(currentIndex, currentIndex + 3)
+              .map((post) => (
+                <a
+                  key={post._id}
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative overflow-hidden shadow-xl bg-white flex-shrink-0 w-1/3 group"
+                >
+                  {/* Post Image */}
+                  <img
+                    src={urlFor(post.mainImage).url()}
+                    alt={post.title}
+                    className="object-cover w-full h-56"
+                  />
+
+                  {/* Post Details */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black opacity-90">
+                    <h3 className="text-xl font-bold text-white mb-2 font-montserrat">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-white opacity-80 font-roboto">
+                      Published:{" "}
+                      {new Date(post.publishedAt).toLocaleDateString()}
+                    </p>
+                    <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <p className="text-white text-center px-4">
+                        {post.excerpt}
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              ))}
+          </div>
+
+          {currentIndex < posts.length - 3 && (
+            <button
+              className="absolute right-0 z-10 p-2 bg-white shadow-md"
+              onClick={nextSlide}
+            >
+              <ChevronRight size={32} />
+            </button>
           )}
         </div>
       </div>

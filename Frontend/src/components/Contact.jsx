@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-import { Phone, Mail, MapPin, CheckCircle } from "lucide-react"; // Import CheckCircle Icon
+import { Phone, Mail, MapPin, CheckCircle } from "lucide-react";
 import emailjs from "emailjs-com";
 
 const ContactInfo = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [status, setStatus] = useState(""); // To track message sending status
-  const [showModal, setShowModal] = useState(false); // Modal visibility state
-  const [isSending, setIsSending] = useState(false); // Button state for sending status
+  const [status, setStatus] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    setIsSending(true); // Show "sending" state on button
+    setIsSending(true);
 
     const templateParams = {
       from_email: email,
@@ -22,108 +20,91 @@ const ContactInfo = () => {
 
     emailjs
       .send(
-        "service_15gmamg", // Your Service ID from EmailJS
-        "template_jxbea9r", // Your Template ID
+        "service_15gmamg",
+        "template_jxbea9r",
         templateParams,
-        "0t7uS81N1_DAuGVjE" // Your Public Key from EmailJS
+        "0t7uS81N1_DAuGVjE"
       )
       .then(
-        (response) => {
-          setStatus("Thanks for writing for me,  I'll be back to you soon !");
-          setEmail(""); // Reset the email field
-          setMessage(""); // Reset the message field
-          setIsSending(false); // Revert button text to "Send Message"
-          setShowModal(true); // Show success modal
-          setTimeout(() => setShowModal(false), 3000); // Hide modal after 3 seconds
+        () => {
+          setStatus("Thanks for reaching out! I'll get back to you soon.");
+          setEmail("");
+          setMessage("");
+          setIsSending(false);
+          setShowModal(true);
+          setTimeout(() => setShowModal(false), 3000);
         },
-        (err) => {
+        () => {
           setStatus("Failed to send message. Please try again.");
-          setIsSending(false); // Revert button text to "Send Message" on error
+          setIsSending(false);
         }
       );
   };
 
   return (
-    <div className="flex flex-col-reverse lg:flex-row items-center bg-gray-100 text-gray-800 px-6 md:px-12 lg:px-20 py-8 md:py-12">
-      {/* Left Side - Contact Details & Form */}
-      <div className="w-full lg:w-1/2 flex flex-col items-start text-left space-y-5 lg:pl-8">
-        <h2 className="text-3xl font-bold text-blue-500">Get in Touch</h2>
-        <p className="text-gray-600 max-w-md text-sm leading-relaxed">
-          Have questions? Reach out to us, and we'll respond as soon as
-          possible.
+    <div className="flex flex-col-reverse lg:flex-row items-center bg-gray-900 text-white px-6 md:px-12 lg:px-20 py-12 md:py-20">
+      {/* Left Side */}
+      <div className="w-full lg:w-1/2 space-y-6">
+        <h2 className="text-4xl font-bold text-blue-500">Get in Touch</h2>
+        <p className="text-gray-300 max-w-md">
+          Have questions or want to work together? Drop me a message.
         </p>
-
-        {/* Contact Details (Single Line) */}
-        <div className="flex flex-wrap gap-4 items-center">
-          {/* Phone */}
-          <div className="flex items-center space-x-2">
-            <div className="bg-blue-500 p-2 rounded-full">
-              <Phone className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-sm font-medium">+250 791998 365</span>
+        <div className="space-y-4">
+          <div className="flex items-center space-x-3">
+            <Phone className="text-blue-500" />
+            <span>+250 791998 365</span>
           </div>
-
-          {/* Email */}
-          <div className="flex items-center space-x-2">
-            <div className="bg-green-500 p-2 rounded-full">
-              <Mail className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-sm font-medium">kalisagad05@gmail.com</span>
+          <div className="flex items-center space-x-3">
+            <Mail className="text-green-500" />
+            <span>kalisagad05@gmail.com</span>
           </div>
-
-          {/* Location */}
-          <div className="flex items-center space-x-2">
-            <div className="bg-red-500 p-2 rounded-full">
-              <MapPin className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-sm font-medium">Kigali, Rwanda</span>
+          <div className="flex items-center space-x-3">
+            <MapPin className="text-red-500" />
+            <span>Kigali, Rwanda</span>
           </div>
         </div>
 
-        {/* Display message status */}
-        {status && (
-          <p className="text-center text-lg font-semibold text-green-500 mb-4">
-            {status}
-          </p>
-        )}
-
         {/* Message Form */}
-        <form onSubmit={handleSubmit} className="w-full space-y-3">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <textarea
-            className="w-full p-3 bg-gray-200 rounded-md text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows="3"
+            className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows="4"
             placeholder="Write your message..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            required
           ></textarea>
           <input
             type="email"
-            className="w-full p-3 bg-gray-200 rounded-md text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Your Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md font-medium text-sm hover:bg-blue-600 transition"
+            className="w-full py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition disabled:opacity-50"
+            disabled={isSending}
           >
             {isSending ? "Sending..." : "Send Message"}
           </button>
         </form>
+        {status && <p className="text-green-400 mt-4">{status}</p>}
       </div>
 
-      {/* Right Side - Banner Image */}
-      <div className="w-full lg:w-1/2 mb-6 lg:mb-0 flex justify-center">
+      {/* Right Side */}
+      <div className="w-full lg:w-1/2 flex justify-center">
         <img
           src="/now.png"
           alt="Contact Banner"
-          className="w-full max-w-md  lg:max-w-lg"
+          className="w-full max-w-sm lg:max-w-md"
         />
       </div>
 
       {/* Success Modal */}
       {showModal && (
-        <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-900 bg-opacity-50">
+        <div className="fixed inset-0 flex justify-center items-center z-50 bg-black bg-opacity-50">
           <div className="bg-green-500 text-white py-4 px-8 rounded-lg flex items-center space-x-3 shadow-lg">
             <CheckCircle className="w-6 h-6 text-white" />
             <span className="text-lg font-semibold">Message Sent!</span>
