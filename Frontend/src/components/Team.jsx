@@ -1,100 +1,90 @@
 import React, { useEffect, useState } from "react";
-import client, { urlFor } from "../sanityClient"; // Import the Sanity client and urlFor utility
-import { FaTwitter, FaLinkedin, FaInstagram, FaFacebook } from "react-icons/fa";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
-const Team = () => {
-  const [teamMembers, setTeamMembers] = useState([]);
+const ScrollIndicator = () => {
+  const [scrollPercentage, setScrollPercentage] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState(null);
+  let lastScrollTop = 0;
 
   useEffect(() => {
-    // Fetch team members data from Sanity
-    client
-      .fetch(
-        `*[_type == "team"]{name, role, image{asset->{_id, url}}, socialLinks}`
-      )
-      .then((data) => {
-        setTeamMembers(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const scrollHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const percentage = (scrollTop / scrollHeight) * 100;
+      setScrollPercentage(percentage);
+
+      // Detect scroll direction
+      if (scrollTop > lastScrollTop) {
+        setScrollDirection("down");
+      } else if (scrollTop < lastScrollTop) {
+        setScrollDirection("up");
+      }
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const circleSize = 40; // Smaller diameter of the circle
+  const strokeWidth = 4;
+  const radius = (circleSize - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (scrollPercentage / 100) * circumference;
+
   return (
-    <section className="bg-gray-950 text-white py-16 px-8">
-      <div className="text-center mb-16">
-        <h2 className="text-5xl font-bold text-cyan-100">Meet Our Team</h2>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        {teamMembers.map((member, index) => (
-          <div
-            key={index}
-            className="bg-gray-950 border border-gray-900 p-0 rounded-lg shadow-lg hover:shadow-xl transition-all"
-          >
-            {/* Image Filling Entire Card */}
-            <div className="relative w-full h-64">
-              <img
-                src={urlFor(member.image.asset).url()} // Use urlFor to generate image URL
-                alt={member.name}
-                className="w-full h-full object-cover rounded-t-lg"
-              />
-            </div>
+    <>
+      {/* Hide default scrollbar */}
+      <style>
+        {
+          "body { scrollbar-width: none; -ms-overflow-style: none; } body::-webkit-scrollbar { display: none; }"
+        }
+      </style>
 
-            {/* Team Member Name and Role */}
-            <div className="text-center p-4">
-              <h3 className="text-xl font-semibold text-blue-400">
-                {member.name}
-              </h3>
-              <p className="text-sm text-gray-400">{member.role}</p>
-            </div>
+      {/* Scroll Indicator */}
+      <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50">
+        <svg
+          width={circleSize}
+          height={circleSize}
+          viewBox={`0 0 ${circleSize} ${circleSize}`}
+          className="rotate-[-90deg]"
+        >
+          {/* Background Circle */}
+          <circle
+            cx={circleSize / 2}
+            cy={circleSize / 2}
+            r={radius}
+            fill="transparent"
+            stroke="#E5E7EB"
+            strokeWidth={strokeWidth}
+          />
+          {/* Progress Circle */}
+          <circle
+            cx={circleSize / 2}
+            cy={circleSize / 2}
+            r={radius}
+            fill="transparent"
+            stroke="#2563EB"
+            strokeWidth={strokeWidth}
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+            strokeLinecap="round"
+            className="transition-all duration-200"
+          />
+        </svg>
 
-            {/* Social Media Links */}
-            <div className="flex justify-center mt-4 space-x-4 mb-4">
-              {member.socialLinks.twitter && (
-                <a
-                  href={member.socialLinks.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-400 hover:text-blue-500"
-                >
-                  <FaTwitter size={24} />
-                </a>
-              )}
-              {member.socialLinks.linkedin && (
-                <a
-                  href={member.socialLinks.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-400 hover:text-blue-500"
-                >
-                  <FaLinkedin size={24} />
-                </a>
-              )}
-              {member.socialLinks.instagram && (
-                <a
-                  href={member.socialLinks.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-pink-400 hover:text-pink-500"
-                >
-                  <FaInstagram size={24} />
-                </a>
-              )}
-              {member.socialLinks.facebook && (
-                <a
-                  href={member.socialLinks.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-700"
-                >
-                  <FaFacebook size={24} />
-                </a>
-              )}
-            </div>
-          </div>
-        ))}
+        {/* Arrow Icon */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          {scrollDirection === "down" ? (
+            <ChevronDown size={16} className="text-blue-600" />
+          ) : (
+            <ChevronUp size={16} className="text-blue-600" />
+          )}
+        </div>
       </div>
-    </section>
+    </>
   );
 };
 
-export default Team;
+export default ScrollIndicator;

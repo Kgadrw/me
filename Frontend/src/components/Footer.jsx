@@ -26,6 +26,19 @@ const Footer = () => {
               </a>
             ))}
           </div>
+          {/* Contact Information */}
+          <div className="text-center text-sm">
+            <p className="text-black">
+              Phone:{" "}
+              <a href="tel:0791998365" className="text-blue-600">
+                0791998365
+              </a>{" "}
+              | Email:{" "}
+              <a href="mailto:kalisagad05@gmail.com" className="text-blue-600">
+                kalisagad05@gmail.com
+              </a>
+            </p>
+          </div>
           {/* Crafted with Love Text */}
           <p className="text-center text-blue-600 text-sm">
             Crafted with love by <span className="font-bold">GAD KALISA</span>

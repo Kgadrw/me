@@ -38,16 +38,14 @@ const Navbar = () => {
             to="/"
             className="text-3xl sm:text-4xl font-extrabold text-blue-600"
           >
-            <img src="/gad.png" alt="logo" className="h-8  sm:h-10" />
+            <img src="/gad.png" alt="logo" className="h-8 sm:h-10" />
           </Link>
         </div>
 
         {/* Right Side: Blog Link, Social Media Icons, and Mobile Menu Button */}
         <div className="flex items-center space-x-4 sm:space-x-6">
-          {/* Blog Link */}
-
-          {/* Social Media Icons with Circle Border */}
-          <div className="flex space-x-4">
+          {/* Social Media Icons with Circle Border - Hidden on Small and Medium Screens */}
+          <div className="hidden md:flex space-x-4">
             <a
               href="https://github.com/Kgadrw"
               className="text-black hover:text-blue-600 border border-gray-300 rounded-full p-2 transition-all transform hover:scale-110 hover:bg-blue-600 hover:text-white"
@@ -81,6 +79,30 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu - Show when the menu is open */}
+      {isMenuOpen && (
+        <div ref={menuRef} className="md:hidden mt-4 space-y-4">
+          <div className="flex flex-col items-end space-y-4">
+            <a
+              href="https://github.com/Kgadrw"
+              className="text-black hover:text-blue-600 transition-all transform hover:scale-110"
+            >
+              <Github size={24} />
+            </a>
+            <a
+              href="https://twitter.com/Kgadrw"
+              className="text-black hover:text-blue-600 transition-all transform hover:scale-110"
+            >
+              <Twitter size={24} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/gad-kalisa-2aa319333"
+              className="text-black hover:text-blue-600 transition-all transform hover:scale-110"
+            >
+              <Linkedin size={24} />
+            </a>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

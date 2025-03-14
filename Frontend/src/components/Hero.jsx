@@ -17,14 +17,14 @@ const Hero = () => {
   if (!heroData) return <div className="py-20 text-center">Loading...</div>;
 
   return (
-    <div className="flex flex-col items-center justify-between min-h-[80vh] px-16 text-gray-900 md:flex-row md:px-16 bg-white font-serif">
+    <div className="relative flex flex-col items-center justify-between min-h-[80vh] px-16 text-gray-900 md:flex-row md:px-16 bg-white font-serif">
       {/* Left: Banner Image */}
       <div className="flex justify-center md:w-1/2">
         {heroData.backgroundImage ? (
           <img
             src={urlFor(heroData.backgroundImage).url()}
             alt="Hero Background"
-            className="w-full max-w-lg h-[400px]  shadow-lg object-container"
+            className="w-full max-w-lg h-[400px] shadow-lg object-container"
           />
         ) : (
           <div className="w-full max-w-lg h-[400px] bg-gray-300 rounded-lg shadow-lg"></div>

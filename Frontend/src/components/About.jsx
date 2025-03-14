@@ -36,8 +36,8 @@ const BlogSection = () => {
       <div className="relative px-8 mx-auto max-w-7xl md:px-16 z-10">
         {/* Heading Section */}
         <div className="text-center mb-16">
-          <h2 className="sm:text-5xl md:text-6xl text-3xl font-extrabold text-blue-600 tracking-wide uppercase">
-            Explore My Latest Blog Posts
+          <h2 className="sm:text-3xl md:text-6xl text-3xl font-extrabold text-blue-600 tracking-wide uppercase">
+            My Latest Linkedin Posts
           </h2>
         </div>
 

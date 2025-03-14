@@ -9,10 +9,11 @@ import Features from "../components/Feature";
 import Plan from "../components/Plans";
 import Testimonial from "../components/Testmonial";
 import Contact from "../components/Contact";
+import Team from "../components/Team";
 
 const Landingpage = () => {
   return (
-    <div>
+    <div className="no-scrollbar">
       <Navbar />
       <Hero />
       <Features />
@@ -20,6 +21,7 @@ const Landingpage = () => {
       <Service />
       <About />
       <Footer />
+      <Team />
     </div>
   );
 };
