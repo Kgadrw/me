@@ -45,12 +45,6 @@ const Navbar = () => {
         {/* Right Side: Blog Link, Social Media Icons, and Mobile Menu Button */}
         <div className="flex items-center space-x-4 sm:space-x-6">
           {/* Blog Link */}
-          <Link
-            to="/about"
-            className="text-sm sm:text-base font-semibold text-black hover:text-blue-600 hidden md:block"
-          >
-            Blogs
-          </Link>
 
           {/* Social Media Icons with Circle Border */}
           <div className="flex space-x-4">
@@ -87,21 +81,6 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu - Show when the menu is open */}
-      {isMenuOpen && (
-        <div
-          ref={menuRef}
-          className="md:hidden absolute top-0 left-0 right-0 bg-white px-8 py-6 mt-16 shadow-lg"
-        >
-          <div className="flex flex-col space-y-4">
-            <Link
-              to="/about"
-              className="text-black text-lg font-medium hover:text-blue-600"
-            >
-              Blogs
-            </Link>
-          </div>
-        </div>
-      )}
     </nav>
   );
 };

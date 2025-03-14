@@ -18,7 +18,7 @@ const Landingpage = () => {
       <Features />
       <Course />
       <Service />
-
+      <About />
       <Footer />
     </div>
   );

@@ -36,7 +36,7 @@ const BlogSection = () => {
       <div className="relative px-8 mx-auto max-w-7xl md:px-16 z-10">
         {/* Heading Section */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-blue-600 tracking-wide uppercase">
+          <h2 className="sm:text-5xl md:text-6xl text-3xl font-extrabold text-blue-600 tracking-wide uppercase">
             Explore My Latest Blog Posts
           </h2>
         </div>
@@ -58,7 +58,7 @@ const BlogSection = () => {
             />
 
             {/* Post Details */}
-            <div className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black opacity-90">
+            <div className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black opacity-80">
               <h3 className="text-3xl sm:text-2xl font-bold text-white mb-3 font-montserrat">
                 {posts[0].title}
               </h3>
