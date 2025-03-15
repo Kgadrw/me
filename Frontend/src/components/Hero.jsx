@@ -19,7 +19,7 @@ const Hero = () => {
   return (
     <div className="relative flex flex-col items-center justify-between min-h-[80vh] px-16 text-gray-900 md:flex-row md:px-16 bg-white font-serif">
       {/* Left: Banner Image */}
-      <div className="flex justify-center md:w-1/2">
+      <div className="hidden md:flex justify-center md:w-1/2">
         {heroData.backgroundImage ? (
           <img
             src={urlFor(heroData.backgroundImage).url()}

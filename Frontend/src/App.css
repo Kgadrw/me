@@ -40,15 +40,3 @@
 .read-the-docs {
   color: #888;
 }
-/* For modern browsers */
-body {
-  scrollbar-width: none;
-  /* Firefox */
-  -ms-overflow-style: none;
-  /* Internet Explorer and Edge */
-}
-
-/* For WebKit browsers like Chrome, Safari */
-body::-webkit-scrollbar {
-  display: none;
-}
